@@ -1,0 +1,214 @@
+/* ===== Base Theme ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root{
+  --bg: #0f1220;
+  --panel: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.10);
+  --card-top: #141b33;
+  --card-bot: #0f1528;
+  --edge: #2a365c;
+  --edge-hover: #33457a;
+  --accent: #5aa3ff;
+  --text: #e9eef7;
+  --muted: #cfe2ff;
+
+  /* New, refined variables for a cleaner look */
+  --card-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  --card-hover-shadow: 0 12px 24px rgba(0,0,0,0.5);
+  --button-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* base */
+html, body { height: 100%; }
+body{
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #1e2240 0%, transparent 60%),
+    radial-gradient(900px 500px at 110% 110%, #1b2b55 0%, transparent 60%),
+    var(--bg);
+  padding: 24px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* main title */
+h1{
+  text-align: center;
+  color: var(--muted);
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+  font-weight: 700;
+}
+
+/* container */
+main > div{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* card */
+main > div > section{
+  background: linear-gradient(180deg, var(--card-top) 0%, var(--card-bot) 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+
+main > div > section:hover{
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: var(--card-hover-shadow);
+}
+
+/* section title */
+main > div > section h2{
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 1.25rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  font-weight: 600;
+}
+
+/* ul inside card */
+main > div > section > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* chapter links */
+a.ch{
+  display: inline-block;
+  padding: 10px 16px;
+  margin: 8px 8px 0 0;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  transition: all .2s ease-in-out;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+a.ch:hover{
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* disabled link look */
+.ch.disabled {
+  pointer-events: none;
+  color: #999;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* make sure status text (sibling span) looks right */
+.status {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* special case: when disabled link is followed by a status span */
+a.ch.disabled + .status {
+  color: #ff4d4d;
+  font-size: 0.8rem;
+  margin-left: 6px;
+}
+
+/* lesson icon */
+.lesson-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* Home and Logout Buttons (desktop: fixed) */
+.home-btn, #logoutBtn {
+  position: fixed;
+  top: 24px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: var(--button-shadow);
+  transition: all .22s ease;
+  z-index: 1100;
+  cursor: pointer;
+  border: none;
+}
+
+/* home (right) */
+.home-btn {
+  right: 24px;
+  background: var(--accent);
+  color: white;
+}
+.home-btn:hover { background: #408ae6; transform: translateY(-2px); }
+
+/* logout (left) */
+#logoutBtn {
+  left: 24px;
+  background: #ff0015;
+  color: white;
+}
+#logoutBtn:hover { background: #c00000; transform: translateY(-2px); }
+
+/* small screens: stack buttons and make them block elements */
+@media (max-width: 768px) {
+  body { padding: 16px; }
+
+  main > div {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .home-btn, #logoutBtn {
+    position: static;
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  /* make chapter links full-width on small devices */
+  a.ch {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 6px 0 0;
+  }
+
+  /* Adjustments for a cleaner mobile look */
+  main > div > section { padding: 16px; }
+  main > div > section h2 { font-size: 1.15rem; }
+  h1 { margin-bottom: 24px; font-size: clamp(1.6rem, 5vw, 2.2rem); }
+}
+
+/* tiny phones: reduce paddings & font sizes */
+@media (max-width: 400px) {
+  body { padding: 12px; }
+  h1 { font-size: 1.5rem; margin-bottom: 20px; }
+  main > div > section { padding: 14px; }
+  a.ch { padding: 9px 12px; font-size: 0.9rem; }
+}

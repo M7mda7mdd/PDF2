@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>Pdfs in one page</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+
+        <link rel='stylesheet' href='style.css'>
+
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <header>
+            <nav aria-label="Primary">
+                <button onclick="logout()"  id="logoutBtn">🚪 Logout</button>
+                <a href="home.html" class="home-btn">🏠 Home</a>
+            </nav>
+        </header>
+        <main>
+            <h1>All PDF</h1>
+            <div>
+                <section>
+                    <h2>Physics <span><img src="../chapters/photos/lightning.png" alt="Atom icon" class="lesson-icon"></span></h2>
+                    <ul>
+                        <li><a class="ch" href="/chapters/Subjects/Physics/phy_ch1.html">Ch1</a></li>
+                        <li><a class="ch disabled">Ch2 </a> <span class="status">Not available</span></li>
+                        <li><a class="ch disabled">Ch3 </a> <span class="status">Not available</span></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Chemistry<span>🧪</span></h2>
+                    <ul>
+                        <li><a class="ch" href="/chapters/Subjects/Chemistry/chem_ch1.html">Ch1</a></li>
+                        <li><a class="ch disabled">Ch2 </a> <span class="status">Not available</span></li>
+                        <li><a class="ch disabled">Ch3 </a> <span class="status">Not available</span></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Arabic</h2>
+                    <ul>
+                        <li><a class="ch" href="/chapters/Subjects/Arabic/Month_1/month_1.html">Month 1</a></li>
+                        <li><a class="ch disabled">Month 2</a><span class="status">Not available</span></li>
+                        <li><a class="ch disabled">Month 3</a><span class="status">Not available</span></li>
+                    </ul>
+                </section>
+            </div>
+        </main>
+    </body>
+</html>

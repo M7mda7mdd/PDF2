@@ -1,0 +1,277 @@
+/* ==============================
+   Chapters Page – Refined & Polished
+   ============================== */
+
+/* --- Theme Variables --- */
+* { box-sizing: border-box; }
+:root {
+  --bg: #0f1220;
+  --panel: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.10);
+  --card-top: #141b33;
+  --card-bot: #0f1528;
+  --edge: #2a365c;
+  --edge-hover: #33457a;
+  --accent: #5aa3ff;
+  --text: #e9eef7;
+  --muted: #cfe2ff;
+
+  --card-shadow: 0 12px 24px rgba(0,0,0,0.4), 0 5px 0 0 var(--edge);
+  --card-hover-shadow: 0 20px 32px rgba(0,0,0,0.5), 0 8px 0 0 var(--edge-hover);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #eef3ff;
+    --panel: rgba(0,0,0,0.03);
+    --border: rgba(0,0,0,0.08);
+    --card-top: #ffffff;
+    --card-bot: #f6f8ff;
+    --edge: #d7def2;
+    --edge-hover: #c9d5f5;
+    --accent: #2563eb;
+    --text: #0f172a;
+    --muted: #274690;
+
+    --card-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 5px 0 0 var(--edge);
+    --card-hover-shadow: 0 16px 28px rgba(0,0,0,0.15), 0 8px 0 0 var(--edge-hover);
+  }
+}
+
+/* --- Page Layout --- */
+html, body {
+  height: 100%;
+  align-content: center;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #1e2240 0%, transparent 60%),
+    radial-gradient(900px 500px at 110% 110%, #1b2b55 0%, transparent 60%),
+    var(--bg);
+  display: grid;
+  place-items: center;
+  padding: 32px 24px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Panel (wrapper) --- */
+body > div {
+  width: min(1100px, 96vw);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* Hide accidental empty inner blocks */
+body > div > div:empty {
+  display: none;
+}
+
+/* --- Heading --- */
+h3 {
+  margin: 0 0 20px;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  letter-spacing: .5px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* --- Card Grid --- */
+body > div > div ul {
+  --gap: clamp(16px, 2.5vw, 24px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  perspective: 1000px;
+}
+
+@media (max-width: 920px) {
+  body > div > div ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  body > div > div ul {
+    grid-template-columns: 1fr;
+  }
+  body > div {
+    padding: 20px;
+  }
+}
+
+/* --- Card Link --- */
+body > div > div ul li {
+  margin: 0;
+}
+
+body > div > div ul li a {
+  --pad: clamp(18px, 2.5vw, 24px);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-content: end;
+  gap: 8px;
+  position: relative;
+  min-height: clamp(150px, 25vw, 190px);
+  padding: var(--pad);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--card-top) 0%, var(--card-bot) 100%);
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  transform-style: preserve-3d;
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s cubic-bezier(.2,.8,.2,1),
+    border-color .35s ease;
+  overflow: hidden;
+}
+
+/* Gloss + top light */
+body > div > div ul li a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 70% at 50% -20%, rgba(255,255,255,0.12), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0) 40%);
+  pointer-events: none;
+}
+
+/* Decorative beam */
+body > div > div ul li a .beam {
+  position: absolute;
+  left: -30%;
+  top: -40%;
+  width: 160%;
+  height: 70%;
+  transform: rotate(12deg) translateZ(10px);
+  background: radial-gradient(60% 120% at 30% 50%, rgba(90,163,255,0.18), transparent 60%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* Hover / active effects */
+body > div > div ul li a:hover {
+  border-color: color-mix(in oklab, var(--accent) 70%, transparent);
+  transform: translateY(-8px);
+  box-shadow: var(--card-hover-shadow);
+}
+body > div > div ul li a:active {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 16px rgba(0,0,0,0.35), 0 4px 0 0 var(--edge);
+}
+
+/* --- Card Content --- */
+body > div > div ul li a .icon {
+  font-size: clamp(32px, 6vw, 44px);
+  line-height: 1;
+  width: 1em;
+  height: 1em;
+  display: inline-grid;
+  place-items: center;
+  opacity: .95;
+  transform: translateZ(18px);
+}
+
+body > div > div ul li a:not(:has(.icon))::after {
+  content: "🧪";
+  position: absolute;
+  top: clamp(16px, 2.5vw, 20px);
+  left: clamp(16px, 2.5vw, 20px);
+  font-size: clamp(32px, 6vw, 44px);
+  transform: translateZ(18px);
+}
+
+body > div > div ul li a .title {
+  margin-top: auto;
+  font-weight: 800;
+  letter-spacing: .5px;
+  font-size: clamp(1.9rem, 6vw, 2.4rem);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  transform: translateZ(14px);
+  color: var(--text);
+}
+
+/* Optional badge */
+body > div > div ul li a .badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 6px 12px;
+  font-size: .8rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--accent) 18%, transparent);
+  color: var(--muted);
+  border: 1px solid color-mix(in oklab, var(--accent) 45%, transparent);
+  transform: translateZ(20px);
+}
+
+/* --- Accessibility & State Styles --- */
+a.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+  filter: grayscale(1);
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body > div > div ul li a {
+    transition: none;
+    transform: none;
+  }
+  body > div > div ul li a:hover,
+  body > div > div ul li a:active {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* --- Home Button (Consolidated) --- */
+.home-btn {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  background: var(--accent);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+  z-index: 1000;
+}
+
+.home-btn:hover {
+  background: #408ae6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 768px) {
+  .home-btn {
+    position: static;
+    display: block;
+    width: 90%;
+    margin: 0 auto 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+}

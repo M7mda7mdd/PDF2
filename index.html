@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  
+
+  <title>Login</title>
+  <style>
+    body {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background: #0f1220;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    .box {
+      background: rgba(255,255,255,0.05);
+      padding: 20px 30px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      margin: 8px 0;
+      width: 200px;
+      border: none;
+      border-radius: 6px;
+    }
+    button {
+      background: #5aa3ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #33457a;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Enter Password</h2>
+    <form id="loginForm">
+      <input type="password" id="password" placeholder="Password" required>
+      <br>
+      <button type="submit">Login</button>
+      <p id="error" class="error"></p>
+    </form>
+  </div>
+
+  <script>
+    // 🔑 Your password hash (for "mySecret123")
+    // To generate a new hash, run the JS snippet I gave you earlier
+    const storedHash = "c35b21d6ca39aa7cc3b79a705d989f1a6e88b99ab43988d74048799e3db926a3";
+    
+    // When logging out, prevent back button from accessing cached pages
+  window.history.replaceState(null, null, window.location.href);
+
+    // Hash function
+    async function sha256(msg) {
+      const msgBuffer = new TextEncoder().encode(msg);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    // Handle login form
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const entered = document.getElementById("password").value;
+      const enteredHash = await sha256(entered);
+
+      if (enteredHash === storedHash) {
+        // ✅ Store session in sessionStorage (auto-clears when tab is closed)
+        sessionStorage.setItem("loggedIn", "true");
+
+        // Set logout timer for 5 min (300000 ms)
+        setTimeout(() => {
+          sessionStorage.removeItem("loggedIn");
+          alert("Session expired. Please login again.");
+          window.location.href = "login.html";
+        }, 300000);
+
+        window.location.href = "home.html";
+      } else {
+        document.getElementById("error").textContent = "Wrong password!";
+      }
+    });
+  </script>
+</body>
+</html>

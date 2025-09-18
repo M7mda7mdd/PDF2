@@ -1,0 +1,191 @@
+/* ==============================
+   Lesson Page - Refined Styles
+   ============================== */
+
+/* --- Base Theme Variables --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --bg: #0f1220;
+  --panel: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+  --card-top: #19203a;
+  --card-bot: #10162a;
+  --edge: #303d66;
+  --edge-hover: #405280;
+  --accent: #5aa3ff;
+  --text: #e9eef7;
+  --muted: #cfe2ff;
+
+  --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 4px 0 0 var(--edge);
+  --card-hover-shadow: 0 16px 28px rgba(0, 0, 0, 0.5), 0 8px 0 0 var(--edge-hover);
+  --button-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Page & Typography --- */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 600px at 10% -10%, #1e2240 0%, transparent 60%),
+    radial-gradient(900px 500px at 110% 110%, #1b2b55 0%, transparent 60%),
+    var(--bg);
+  padding: 2.5rem 1.5rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Page Heading --- */
+h1 {
+  text-align: center;
+  color: var(--muted);
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.03rem;
+  font-weight: 700;
+}
+
+/* --- Main Content Container --- */
+.lessons-container {
+  width: min(1100px, 94vw);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  padding: 1.875rem;
+  backdrop-filter: blur(0.5rem);
+  box-shadow: 0 0.9375rem 2.5rem rgba(0, 0, 0, 0.4), inset 0 0.0625rem 0 rgba(255, 255, 255, 0.08);
+}
+
+/* --- Card Grid --- */
+.lessons-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- Individual Card --- */
+.card-link {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: start;
+  gap: 0.75rem;
+  position: relative;
+  min-height: 12.5rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--card-top) 0%, var(--card-bot) 100%);
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease;
+  overflow: hidden;
+}
+
+/* Hover/active effects */
+.card-link:hover {
+  border-color: color-mix(in oklab, var(--accent) 70%, transparent);
+  transform: translateY(-0.5rem);
+  box-shadow: var(--card-hover-shadow);
+}
+.card-link:active {
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.35), 0 0.25rem 0 0 var(--edge);
+}
+
+/* --- Card Elements --- */
+.card-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 0 0.5rem rgba(90, 163, 255, 0.6));
+}
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0;
+}
+
+.card-text {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin: 0;
+}
+
+/* --- Home Button --- */
+.home-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.75rem 1.375rem;
+  border-radius: 1.5625rem;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--button-shadow);
+  transition: all 0.2s ease;
+  z-index: 1000;
+}
+
+.home-btn:hover {
+  background: #408ae6;
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.5rem 1.125rem rgba(0, 0, 0, 0.4);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .lessons-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .home-btn {
+    position: static;
+    display: block;
+    width: 100%;
+    max-width: 20rem;
+    margin: 0 auto 1.25rem;
+    text-align: center;
+    border-radius: 0.5rem;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    padding: 1.25rem 1rem;
+  }
+  .lessons-container {
+    padding: 1.25rem;
+  }
+  .card-link {
+    min-height: 10rem;
+    padding: 1.25rem;
+  }
+  .card-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+  .card-title {
+    font-size: 1.2rem;
+  }
+  h1 {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
+  }
+}
