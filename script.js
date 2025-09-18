@@ -1,40 +1,31 @@
-const loginPage = "/index.html"; // login page
-const mainPage = "/home.html";   // main page after login
 
-function checkAuth() {
-    const loggedIn = localStorage.getItem("loggedIn");
-    const currentPath = window.location.pathname;
-
-    // If not logged in and not on login page → redirect to login
-    if (loggedIn !== "true" && currentPath !== loginPage) {
-        window.location.href = loginPage;
-    }
-
-    // If logged in and on login page → redirect to main page
-    if (loggedIn === "true" && currentPath === loginPage) {
-        window.location.href = mainPage;
-    }
+// 🔐 Redirect to login if not logged in
+if (sessionStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "home.html";
 }
 
-// Auto logout after 5 minutes of inactivity
 let logoutTimer;
+
 function resetTimer() {
     clearTimeout(logoutTimer);
     logoutTimer = setTimeout(() => {
-        localStorage.removeItem("loggedIn");
+        sessionStorage.removeItem("loggedIn");
         alert("You were logged out due to 5 minutes of inactivity.");
-        window.location.href = loginPage;
-    }, 5 * 60 * 1000);
+        window.location.href = "login.html";
+    }, 5 * 60 * 1000); // 5 minutes
 }
 
-// Setup event listeners
-function setupTimers() {
-    window.addEventListener("load", resetTimer);
-    document.addEventListener("mousemove", resetTimer);
-    document.addEventListener("keydown", resetTimer);
-    document.addEventListener("touchstart", resetTimer);
+// Events that reset the timer
+window.onload = resetTimer;
+document.onmousemove = resetTimer;
+document.onkeydown = resetTimer;
+document.ontouchstart = resetTimer; // for mobile
+
+// 🔓 Manual logout
+function logout() {
+    sessionStorage.removeItem("loggedIn");
+    window.location.href = "login.html";
 }
 
-// Run on page load
-checkAuth();
-setupTimers();
+
+// <!-- Logout button (moved outside script for proper rendering) -->
